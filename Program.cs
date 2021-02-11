@@ -8,11 +8,28 @@ namespace IronNinja
         static void Main(string[] args)
         {
             Buffet myBuffet = new Buffet();
-            Ninja myNinja = new Ninja();
-            do { // Continue eating until full
-                myNinja.Eat(myBuffet.Serve());
-            } while (myNinja.isFull == false);
-            myNinja.Eat(myBuffet.Serve()); // Eat one more time to console log that the ninja is full
+            SweetTooth sweetTooth = new SweetTooth();
+            SpiceHound spiceHound = new SpiceHound();
+            int count1 = 0;
+            int count2 = 0;
+
+            while (sweetTooth.isFull == false) {
+                sweetTooth.Consume(myBuffet.Serve());
+                count1++;
+            }
+
+            while (spiceHound.isFull == false) {
+                spiceHound.Consume(myBuffet.Serve());
+                count2++;
+            }
+
+            if (count1 > count2) {
+                Console.WriteLine($"SweetTooth consumed the most with {count1} items consumed.");
+            } else if (count2 > count1) {
+                Console.WriteLine($"SpiceHound consumed the most with {count2} items consumed.");
+            } else {
+                Console.WriteLine($"Both Ninjas consumed {count1} items.");
+            }
         }
     }
 }

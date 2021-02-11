@@ -1,38 +1,27 @@
 using System;
 using System.Collections.Generic;
+using IronNinja.Interfaces;
 
 namespace IronNinja.Models
 {
-    public class Ninja
+    public abstract class Ninja
     {
-        private int calorieIntake;
-        public List<Food> FoodHistory;
+        protected int calorieIntake;
+        public int CalorieIntake {
+            get {
+                return calorieIntake;
+            }
+        }
+        public List<IConsumable> History;
         
         // add a constructor
         public Ninja() {
             calorieIntake = 0;
-            FoodHistory = new List<Food>();
+            History = new List<IConsumable>();
         }
         // add a public "getter" property called "IsFull"
-        public bool isFull {
-            get {
-                if (calorieIntake > 1200) {
-                    return true;
-                }
-                return false;
-            }
-        }
+        public abstract bool isFull {get;}
         // build out the Eat method
-        public void Eat(Food item)
-        {
-            if (isFull == false) {
-                calorieIntake += item.Calories;
-                FoodHistory.Add(item);
-                Console.WriteLine($"Name: {item.Name}\n Is it Spicy?: {item.IsSpicy}\n Is it Sweet?: {item.IsSweet}");
-            }
-            else {
-                Console.WriteLine("This ninja is full.");
-            }
-        }
+        public abstract void Consume(IConsumable item);
     }
 }
